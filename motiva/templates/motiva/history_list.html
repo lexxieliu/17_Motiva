@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}History | Motiva{% endblock %}
+{% block content %}
+<section>
+  <h1>Your history</h1>
+  {% if has_checkins %}
+    <form method="get" role="search">
+      {{ search_form.q.label_tag }}
+      {{ search_form.q }}
+      <p><button type="submit">Search</button>{% if query %} <a href="{% url 'history_list' %}">Clear search</a>{% endif %}</p>
+    </form>
+    {% for checkin in checkins %}
+      <article>
+        <h2>{{ checkin.goal }}</h2>
+        <dl>
+          <dt>Action</dt><dd>{{ checkin.next_action }}</dd>
+          <dt>Date</dt><dd>{{ checkin.created_at|date:"M j, Y" }}</dd>
+          <dt>Outcome</dt>
+          <dd>{% if checkin.reflection %}{{ checkin.reflection.get_outcome_display }}{% else %}No reflection yet{% endif %}</dd>
+        </dl>
+        <p>
+          <a href="{% url 'checkin_detail' checkin.pk %}">View action plan</a> ·
+          <a href="{% url 'reflection_edit' checkin.pk %}">{% if checkin.reflection %}Edit reflection{% else %}Reflect{% endif %}</a>
+        </p>
+      </article>
+    {% empty %}
+      <p>No check-ins match “{{ query }}”.</p>
+    {% endfor %}
+  {% else %}
+    <p>No check-ins yet. <a href="{% url 'checkin_create' %}">Start a check-in</a> to build your history.</p>
+  {% endif %}
+</section>
+{% endblock %}

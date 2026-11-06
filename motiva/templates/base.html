@@ -27,6 +27,7 @@
     <strong>Motiva</strong>
     {% if user.is_authenticated %}
       <a href="{% url 'checkin_create' %}">New check-in</a>
+      <a href="{% url 'history_list' %}">History</a>
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit">Sign out</button>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Reflect | Motiva{% endblock %}
+{% block content %}
+<section>
+  <h1>Reflect on your action</h1>
+  <dl>
+    <dt>Goal</dt><dd>{{ checkin.goal }}</dd>
+    <dt>Action</dt><dd>{{ checkin.next_action }}</dd>
+  </dl>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save reflection</button>
+  </form>
+  <p><a href="{% url 'checkin_detail' checkin.pk %}">Back to action plan</a></p>
+</section>
+{% endblock %}
