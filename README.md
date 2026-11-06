@@ -1,10 +1,19 @@
 # Motiva
 
-Motiva helps college students turn a learning goal and its immediate barrier into one manageable next action. This A3 handoff includes the Django foundation, sign-in, and the database-backed check-in and editable action plan. Both application models and their initial migration are included. Lexxie owns the reflection and history pages and the initial AI plan.
+Motiva helps college students turn a learning goal and its immediate barrier into one manageable next action, then reflect on how it went. This is the A3 local prototype, built with Django and SQLite.
+
+## Implemented features
+
+- Sign-in and sign-out with Django's built-in accounts. Personal pages require sign-in.
+- **Check-in:** enter a goal, a barrier, confidence, importance, and demand ratings (1–5), and available minutes (1–180). Invalid input shows errors and saves nothing.
+- **Action planning:** a valid check-in is saved with a rule-based suggested action, which the user can edit and save.
+- **Reflection:** record whether the action was completed, partly completed, or not started, with optional notes. Each check-in has one reflection; later edits update it.
+- **History:** the user's own check-ins, newest first, with goal, action, date, and outcome or "No reflection yet". Includes a goal search.
+- Each user can see and change only their own records.
 
 ## Run locally
 
-Open a terminal in the folder containing `manage.py`. The handoff was checked with Python 3.12 and Django 5.2.18.
+Requires Python 3.12 or later. Open a terminal in the folder containing `manage.py`.
 
 ```sh
 python3 -m venv .venv
@@ -15,16 +24,35 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-On Windows PowerShell, use `.venv\Scripts\Activate.ps1` to activate the environment. Create your own local username and password when prompted. Sign in at <http://127.0.0.1:8000/>. SQLite creates the local database when you run migrations.
+On Windows PowerShell, activate the environment with `.venv\Scripts\Activate.ps1`.
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Open the check-in flow |
-| `/accounts/login/` | Sign in |
-| `/checkins/new/` | Save a goal, barrier, ratings, and available minutes |
-| `/checkins/<id>/` | Review the saved check-in and edit its action |
-| `/accounts/logout/` | Sign out using the navigation button |
+- **Dependencies:** listed in `requirements.txt` (Django 5.2.18).
+- **Database:** `migrate` creates a local SQLite file, `db.sqlite3`, which is not committed.
+- **Local user:** `createsuperuser` prompts for a username and password of your choice. Public registration is not included.
+- **Configuration:** none required. `DJANGO_SECRET_KEY` can be set as an environment variable; otherwise a local development key is used. No AI API key is needed.
 
-Try a goal such as “Start my chemistry review,” choose “Unsure where to start,” enter three ratings from 1 to 5, and enter 15 minutes. Save the check-in, revise the suggested action, and refresh to confirm the edit persisted. Suggestions in this build come from a short rule-based mapping. The local workflow runs without an AI service or API key.
+Open <http://127.0.0.1:8000/> and sign in.
 
-See [HANDOFF.md](HANDOFF.md) for the extension steps, [product scope](docs/product_scope.md) for the A3 product update, and [roadmap](docs/roadmap.md) for responsibilities and targets. The settings are for local development. Deployment configuration belongs to the A4 milestone.
+## Main routes
+
+| Route | Name | Purpose |
+| --- | --- | --- |
+| `/` | | Redirects to a new check-in |
+| `/accounts/login/` | `login` | Sign in |
+| `/accounts/logout/` | `logout` | Sign out (navigation button) |
+| `/checkins/new/` | `checkin_create` | Save a check-in |
+| `/checkins/<id>/` | `checkin_detail` | View the check-in and edit its action |
+| `/checkins/<id>/reflect/` | `reflection_edit` | Save or update the reflection |
+| `/history/` | `history_list` | View and search past check-ins |
+
+## AI status
+
+**Proposed, not integrated.** Suggested actions come from a rule-based mapping by barrier. The planned model-assisted suggestion is described in [README_AI.md](README_AI.md). No AI experiment was run for A3.
+
+## Known gaps
+
+- Model-based suggestions, the work-session timer, account settings, and public registration are planned for A4.
+- Settings are for local development only (`DEBUG = True`). The app is not deployed.
+- No automated tests are included yet.
+
+See [HANDOFF.md](HANDOFF.md), [product scope](docs/product_scope.md), and [roadmap](docs/roadmap.md).
