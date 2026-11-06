@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Action plan | Motiva{% endblock %}
+{% block content %}
+<section>
+  <h1>Your saved action plan</h1>
+  <dl>
+    <dt>Goal</dt><dd>{{ checkin.goal }}</dd>
+    <dt>Barrier</dt><dd>{{ checkin.get_barrier_display }}</dd>
+    <dt>Available time</dt><dd>{{ checkin.available_minutes }} minutes</dd>
+    <dt>Check-in ratings</dt>
+    <dd>Confidence {{ checkin.confidence }}/5 · Importance {{ checkin.importance }}/5 · Demand {{ checkin.demand }}/5</dd>
+  </dl>
+  <p class="hint"><strong>Rule-based suggestion</strong><br>{{ baseline_action }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save action</button>
+  </form>
+</section>
+{% endblock %}

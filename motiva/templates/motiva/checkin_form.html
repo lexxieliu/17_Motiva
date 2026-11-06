@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}New check-in | Motiva{% endblock %}
+{% block content %}
+<section>
+  <h1>Check in with one learning goal</h1>
+  <p class="hint">For each rating, 1 means not at all and 5 means very much.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save and choose a next step</button>
+  </form>
+</section>
+{% endblock %}

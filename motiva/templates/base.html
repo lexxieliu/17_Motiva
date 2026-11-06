@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Motiva{% endblock %}</title>
+  <style>
+    body { margin: 0; background: #f5f7fa; color: #182334; font: 1rem/1.5 system-ui, sans-serif; }
+    nav, main { max-width: 42rem; margin: auto; padding: 1rem; }
+    nav { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+    nav form { margin: 0 0 0 auto; }
+    section { padding: clamp(1rem, 4vw, 2rem); background: white; border: 1px solid #d6dce5; border-radius: 0.75rem; }
+    h1 { margin-top: 0; line-height: 1.2; }
+    a { color: #184c89; }
+    button { background: #164578; color: white; border: 0; border-radius: 0.3rem; padding: 0.55rem 0.85rem; font: inherit; cursor: pointer; }
+    label { display: block; font-weight: 600; }
+    input, textarea, select { box-sizing: border-box; width: 100%; max-width: 100%; border: 1px solid #768296; border-radius: 0.3rem; padding: 0.45rem; font: inherit; }
+    :focus-visible { outline: 3px solid #427cbb; outline-offset: 2px; }
+    .errorlist { color: #a22126; }
+    .hint { color: #49556a; }
+    dt { font-weight: 600; }
+    dd { margin: 0 0 0.6rem; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <nav aria-label="Main navigation">
+    <strong>Motiva</strong>
+    {% if user.is_authenticated %}
+      <a href="{% url 'checkin_create' %}">New check-in</a>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Sign out</button>
+      </form>
+    {% endif %}
+  </nav>
+  <main>{% block content %}{% endblock %}</main>
+</body>
+</html>
