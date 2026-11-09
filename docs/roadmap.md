@@ -1,14 +1,15 @@
 # Motiva development roadmap
 
-Status reflects the Ashley handoff. Update it after reviewing the final A3 commit. Completion dates are proposed team targets.
+A3 status was reviewed against `cf0d8f996eecc90ce6f49a34bec128088d8c5928` on November 8, 2026. Dates below are planned completion targets for the remaining A4 work.
 
-| Task | Current status | Responsible member | Expected completion |
+| Task | Current Status | Responsible Member | Expected Completion |
 | --- | --- | --- | --- |
-| Django Core Features | Sign-in, check-in, and editable action implemented. Reflection and history pages next. Timer remains an A4 task. | Ashley: check-in and action. Lexxie: reflection, history, and session. | Nov 20 |
-| Database and APIs | CheckIn and Reflection models and initial migration included. API and history filtering are planned. | Ashley: schema support. Lexxie: API and history data feature. | Nov 20 |
-| AI Integration | Rule-based baseline works. Initial model plan and Django integration are pending. | Lexxie: AI plan and implementation. Ashley: strategy content and quality criteria. | Nov 24 |
-| Evaluation and Testing | Handoff checks cover the current flow. Verify reflection/history after integration and record the full A4 evaluation. | Ashley: evaluation and verification. Lexxie: technical checks and fixes. | Dec 1 |
-| Deployment | Local Django setup ready. Hosting, cost comparison, and scalability analysis are planned. | Lexxie: deployment and infrastructure analysis. Ashley: deployed user-flow verification. | Dec 3 |
-| Documentation | Setup, handoff, and scope drafted. Update the README, AI documentation, and roadmap after integration. | Ashley: scope, roadmap, and evaluation. Lexxie: technical and AI documentation. | Dec 6 |
+| Django Core Features | A3 sign-in, check-in, editable action, reflection creation/editing, and searchable history are implemented and verified. A4 work includes the session timer and interface refinement. | Ashley for check-in/action. Lexxie for reflection/history/session. | Nov 20, 2026 |
+| Database and APIs | CheckIn and Reflection models, ownership, migrations, and database-backed workflows are verified. History goal search works. A meaningful JSON API remains planned. | Ashley for schema support. Lexxie for API and history data features. | Nov 20, 2026 |
+| AI Integration | README_AI.md defines the candidate model, input/output, Django workflow, validation, and fallback. Current suggestions are rule based. Model integration and experiments remain planned. | Lexxie for AI implementation. Ashley for strategy content and evaluation criteria. | Nov 24, 2026 |
+| Evaluation and Testing | Final A3 route checks passed for the integrated flow, validation, persistence, search, and account isolation. The full A4 evaluation with at least five realistic tests, two genuine failures or limitations, and evidence of an improvement remains planned. | Ashley for evaluation records and workflow verification. Lexxie for technical checks and fixes. | Dec 1, 2026 |
+| Deployment | Local setup and migrations were verified. Public hosting, infrastructure/cost comparison, and scaling analysis remain planned. | Lexxie for deployment and infrastructure analysis. Ashley for deployed workflow verification. | Dec 3, 2026 |
+| Documentation | README, AI plan, product scope, handoff, and A3 verification records are available. Update documentation as the A4 implementation develops. | Ashley for scope/roadmap/evaluation. Lexxie for setup and AI documentation. | Dec 6, 2026 |
 
-A3 repository URL is due November 9 at 11:59 PM. The final A4 push and demonstration are due December 8.
+The A3 repository URL is due November 9, 2026 at 11:59 PM. The A4 final push and demonstration are due December 8, 2026.
+
