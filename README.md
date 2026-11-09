@@ -55,4 +55,16 @@ Open <http://127.0.0.1:8000/> and sign in.
 - Settings are for local development only (`DEBUG = True`). The app is not deployed.
 - No automated tests are included yet.
 
-See [HANDOFF.md](HANDOFF.md), [product scope](docs/product_scope.md), and [roadmap](docs/roadmap.md).
+## A3 submission materials
+
+Team 17 consists of Ashley Zhou and Lexxie Liu. The A3 materials are in this repository.
+
+- [Product scope update](docs/product_scope.md)
+- [AI technical plan](README_AI.md)
+- [Development progress and roadmap](docs/roadmap.md)
+- [Integrated prototype verification](docs/a3_checks.md)
+
+Submit the repository URL through Canvas by November 9, 2026 at 11:59 PM.
+
+See [HANDOFF.md](HANDOFF.md) for the handoff status.
+

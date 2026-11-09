@@ -21,4 +21,5 @@ Follow [README.md](README.md) on a fresh checkout: create a virtual environment,
 
 ## Remaining for Ashley
 
-Update `docs/roadmap.md` statuses for the final commit, verify a clean checkout following README.md, record results in `docs/a3_checks.md`, and submit the repository URL on Canvas by November 9, 11:59 PM.
+The integrated source was verified in a fresh environment on November 8, 2026. The roadmap, product scope, and `docs/a3_checks.md` now reflect the completed A3 workflow. Twenty-five route-level checks passed. The remaining submission step is to submit the repository URL on Canvas by November 9, 11:59 PM.
+
