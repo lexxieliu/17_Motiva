@@ -18,7 +18,19 @@ class CheckIn(models.Model):
     importance = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     demand = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     available_minutes = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(180)])
+    class SuggestionSource(models.TextChoices):
+        AI = "ai", "AI (Gemini)"
+        RULE = "rule", "Rule-based"
+
     next_action = models.TextField()
+    suggested_action = models.TextField(blank=True)
+    suggestion_source = models.CharField(
+        max_length=4, choices=SuggestionSource.choices, default=SuggestionSource.RULE
+    )
+    ai_strategy = models.CharField(max_length=12, blank=True)
+    ai_rationale = models.TextField(blank=True)
+    ai_estimated_minutes = models.PositiveSmallIntegerField(null=True, blank=True)
+    ai_latency_ms = models.PositiveIntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

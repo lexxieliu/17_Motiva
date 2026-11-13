@@ -3,11 +3,20 @@
 {% block content %}
 <section>
   <h1>Check in with one learning goal</h1>
-  <p class="hint">For each rating, 1 means not at all and 5 means very much.</p>
+  <p class="hint">For each rating, click a number: 1 means not at all and 5 means very much.</p>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <p class="hint"><small>Your goal, barrier, ratings, and minutes are sent to an external AI service (Google Gemini) to suggest a next step. Your name and account details are not sent. Avoid including personal information in the goal.</small></p>
     <button type="submit">Save and choose a next step</button>
   </form>
+  <script>
+    // Show progress while the AI suggestion is generated (it can take several seconds).
+    document.querySelector("section form").addEventListener("submit", function () {
+      var button = this.querySelector("button[type=submit]");
+      button.disabled = true;
+      button.textContent = "Generating your next step with AI…";
+    });
+  </script>
 </section>
 {% endblock %}

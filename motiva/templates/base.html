@@ -18,6 +18,13 @@
     :focus-visible { outline: 3px solid #427cbb; outline-offset: 2px; }
     .errorlist { color: #a22126; }
     .hint { color: #49556a; }
+    /* 1–5 rating bubbles (RadioSelect: the wrapper div and each input get class "scale-input") */
+    div.scale-input { display: flex; gap: 0.6rem; margin: 0.4rem 0 0.2rem; }
+    div.scale-input label { display: inline-flex; align-items: center; justify-content: center; width: 2.6rem; height: 2.6rem; border: 2px solid #768296; border-radius: 50%; font-weight: 600; cursor: pointer; user-select: none; }
+    div.scale-input label:hover { border-color: #164578; background: #eef3f9; }
+    div.scale-input label:has(input:checked) { background: #164578; border-color: #164578; color: white; }
+    div.scale-input label:has(input:focus-visible) { outline: 3px solid #427cbb; outline-offset: 2px; }
+    input.scale-input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
     dt { font-weight: 600; }
     dd { margin: 0 0 0.6rem; overflow-wrap: anywhere; }
   </style>

@@ -16,6 +16,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load local secrets (GEMINI_API_KEY, GEMINI_MODEL) from .env, which is not committed.
+try:
+    from dotenv import load_dotenv
+except ImportError:  # python-dotenv is optional; real environment variables still work
+    pass
+else:
+    load_dotenv(BASE_DIR / ".env")
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -125,3 +133,12 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Show Motiva's AI suggestion logs (latency, token counts) in the runserver console.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {"motiva": {"handlers": ["console"], "level": "INFO"}},
+}

@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
+from . import ai_suggestions
 from .forms_checkins import ActionForm, CheckInForm
 from .models import CheckIn
 
@@ -15,6 +16,22 @@ BASELINE_ACTIONS = {
 }
 
 
+def apply_suggestion(checkin):
+    """Use a validated AI suggestion when available; otherwise the rule-based action."""
+    suggestion = ai_suggestions.suggest_action(checkin)
+    if suggestion is None:
+        checkin.suggestion_source = CheckIn.SuggestionSource.RULE
+        checkin.suggested_action = BASELINE_ACTIONS[checkin.barrier]
+    else:
+        checkin.suggestion_source = CheckIn.SuggestionSource.AI
+        checkin.suggested_action = suggestion.action
+        checkin.ai_strategy = suggestion.strategy
+        checkin.ai_rationale = suggestion.rationale
+        checkin.ai_estimated_minutes = suggestion.estimated_minutes
+        checkin.ai_latency_ms = suggestion.latency_ms
+    checkin.next_action = checkin.suggested_action
+
+
 @login_required
 @require_http_methods(["GET", "POST"])
 def checkin_create(request):
@@ -22,7 +39,7 @@ def checkin_create(request):
     if request.method == "POST" and form.is_valid():
         checkin = form.save(commit=False)
         checkin.owner = request.user
-        checkin.next_action = BASELINE_ACTIONS[checkin.barrier]
+        apply_suggestion(checkin)
         checkin.save()
         return redirect("checkin_detail", pk=checkin.pk)
     return render(request, "motiva/checkin_form.html", {"form": form})
