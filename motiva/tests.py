@@ -88,3 +88,16 @@ class RatingInputTests(TestCase):
         response = self.client.post(reverse("checkin_create"), {**CHECKIN_DATA, "importance": 10})
         self.assertEqual(response.status_code, 200)
         self.assertFalse(CheckIn.objects.exists())
+
+
+class SeedDemoTests(TestCase):
+    def test_seed_demo_creates_user_and_history(self):
+        from django.core.management import call_command
+
+        call_command("seed_demo", password="demo-pass-123", stdout=open("/dev/null", "w"))
+        user = get_user_model().objects.get(username="demo_student")
+        self.assertTrue(user.check_password("demo-pass-123"))
+        self.assertEqual(CheckIn.objects.filter(owner=user).count(), 4)
+        self.client.force_login(user)
+        response = self.client.get(reverse("history_list"))
+        self.assertContains(response, "SQL joins")
